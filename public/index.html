@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Backbone Music Player</title>
+	<script type="text/javascript" src="js/jquery.js"> </script>
+	<script type="text/javascript" src="js/underscore.js"> </script>
+	<script type="text/javascript" src="js/backbone.js"> </script>
+
+	<script type="text/javascript" src="js/TuneSpe.cjs"> </script>
+	<script type="text/javascript" src="js/main.js"> </script>
+	
+	<link rel="stylesheet" type="text/css" href="css/screen.css">	
+	<link rel="stylesheet" type="text/css" href="css/fancypants.css">	
+
+	<script type="text/template" id="album-template">
+		<span class="album-title"><%= title %></span>
+		<span class="album-name"><%= artist %></span>
+		<ol class="tracks">
+			<% _.each(tracks, function(track) { %> 
+				<li><%= track.title %></li>
+			<% }); %>
+		</ol>
+	</script>
+</head>
+<body>
+	<div class="container">
+		
+	</div>
+</body>
+</html>
