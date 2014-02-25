@@ -1,4 +1,4 @@
-require './lib/init'
+# require './lib/init'
 
 desc "Run the server"
 task :server do

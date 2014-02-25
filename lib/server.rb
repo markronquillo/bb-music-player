@@ -1,4 +1,7 @@
-require "./lib/init"
+# require "./lib/init"
+
+require "rubygems"
+require "sinatra"
 
 disable :logging
 set :root, File.dirname(__FILE__) + "/../"
