@@ -21,10 +21,58 @@ _.bindAll
 
 		_.bind - 
 
-Jasmine: 
+JASMINE: 
 ========
 	describe is usually for class
 	'it' is for method or use case
+
+
+COLLECTION:
+==========
+Collections: 
+	each: 
+	map: produces new array of values by mapping each value in the list through a transformation function (iterator)
+	pluck: will pull out a single attribute in each model and return as array
+	select, 
+	reject, 
+	pluck, 
+	max, 
+	min, 
+	sortBy, 
+	size
+
+Arrays: first, rest, last, compact, flatten, without, union, intersection, uniq, indexOf, range
+
+Functions: bind, bindAll, memoize, delay, defer, throttle, once , after wrap
+
+
+COLLECTION AND VIEWS:
+=====================
+Render on data: it happens asynchronously, so you can't guarantee that the data will be thete at any specific time. React to the arrival of data.
+
+May fire several times: The render method will be called at least twice, and maybe many more times. Clear out the existing HTML so content isn't duplicated
+
+Collection - add, remove, reset
+
+Albums.reset([ {title: '..' }])
+	- Preload - Call 'reset' directly with an array of key/value objects. fires the reset when done
+
+ROUTER:
+=======
+* Understand the role of the Router
+* Write a route
+* Write a route handler method
+* Understand URLs and pushState
+* Navigate programmatically
+
+Parts of the router:
+routes - keys and values mapping URLs to custom route handler methods
+initialize - setup root views, but dont' render or append to the document
+custome route handlers - add specific views to the document adn load extra data (such as a specific date specified in the URL)
+
+{ pushState: true } // try to implement using push state
+
+
 
 
 TODO

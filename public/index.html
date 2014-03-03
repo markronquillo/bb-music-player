@@ -6,11 +6,16 @@
 	<script type="text/javascript" src="assets/js/underscore.js"> </script>
 	<script type="text/javascript" src="assets/js/backbone.js"> </script>
 
-	<script type="text/javascript" src="assets/js/TuneSpec.js"> </script>
+	<script type="text/javascript" src="assets/js/Tunes.js"> </script>
 	<script type="text/javascript" src="assets/js/main.js"> </script>
 	
 	<link rel="stylesheet" type="text/css" href="assets/css/screen.css">	
 	<link rel="stylesheet" type="text/css" href="assets/css/fancypants.css">	
+
+	<script type="text/template" id="library-template">
+		<h1> Music Library </h1>
+		<ul class="albums"> </ul>	
+	</script>
 
 	<script type="text/template" id="album-template">
 		<span class="album-title"><%= title %></span>
@@ -20,6 +25,12 @@
 				<li><%= track.title %></li>
 			<% }); %>
 		</ol>
+	</script>
+
+	<script>
+		$(function() {
+			window.library.fetch(); // fetch rest api	
+		});
 	</script>
 </head>
 <body>
