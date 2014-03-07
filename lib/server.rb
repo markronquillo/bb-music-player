@@ -15,6 +15,10 @@ get "/albums" do
   File.readlines("public/albums.json")
 end
 
+get "/images/:file" do
+	send_file("public/assets/images/" + params[:file], :disposition => 'inline');
+end
+
 get "/favicon.ico" do
   ""
 end

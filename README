@@ -26,6 +26,23 @@ JASMINE:
 	describe is usually for class
 	'it' is for method or use case
 
+PROJECT DESCRIPTION:
+====================
+1. Contains a playlist view on the left side that contains all the selected album (with tracks) to be played, has play, stop, next, previous buttons
+2. Contains music library on the right that contains all the albums with its corresponding tracks (songs) has a add button when clicked album will be added to the playlist
+
+- Create Album Model (Album)
+- Create View for each model -- contains add button, title, artist and tracks (Album)
+- Create View for each model in library -- contains (LibraryAlbumView)
+- Create View for Collection of albums (Music library) -- contains each of all the albums in the collection (LibraryView)
+- Create View for Collection of selected albums (PlaylistView) -- contains header, play/stop, next, prev buttons and albums
+- Create Collection for selected albums (Playlist)
+- Create Player model -- contains 
+
+Questions
+----------
+1. What will happen if the user adds an album that is already existing
+
 
 COLLECTION:
 ==========
@@ -72,10 +89,63 @@ custome route handlers - add specific views to the document adn load extra data 
 
 { pushState: true } // try to implement using push state
 
+==============================================
+II. Interactivity
 
+1. Add button
+	* Manipulate data not markup
 
+2. 
+	- Make a playlist collection
+	- Reuse exisitng models and collections
+	- Write a test for the new collection
+	- Add custom methods to a collection
 
-TODO
-====
-	- continue episode 1 | collection
-	- finish episode 2 until later (friday)
+	Reusing Collection
+	- Role: each collection may hold different data use the same model.	
+	- Custom Queries: Server-backed collections may modify their URL to fetch different data, but use the same model to store it.
+
+	TDD: Playlist 11:35
+
+3. 
+	- Design and implement the Player model
+	- Use default model attributes
+	- Use Javascript properties
+	- Implement play and pause methods
+	- Write convenience methods
+	- Use at()
+
+	Collection
+		- Manages an array of models
+		- can trigger custom events
+		- can become complicated when trying to recreate the functionality of a model
+		- Can become complicated when trying to recreate the functionality of a model
+
+	Model:
+		- Works with attributes
+		- Automatically triggers data change events
+		- Can use custom methods
+		- Can use JS properties to reference other objects
+	
+	NextTrack and PreviousTrack:
+		[TDD] mindset, always keep in mind that the data depends on what you declare/provided e.g. in TunesSpec.js data are passed in beforeEach function, you can manipulate data in other describes without affecting the data on the other. Always keep in mind of the data, state and values
+		
+		[TDD] Read the tests on "player" there are describes there that has a value and no value. Knowing that, we must provide data for the test functionality.
+
+4. PlaylistAlbumView
+	- Make a subclass for PlaylistAlbumView 
+
+	* Coffeescript methods without arguments should use parentheses
+
+5. PlaylistView
+	- Implement Playlist view
+	- Add controls
+	- Optimize template setup
+	- Use Backbone Model options
+
+6. Add & Remove Albums
+	- click -> select -> view -> add -> view
+
+	change to the UI should happen in reaction in a data change event not directly from the user interaction event.
+
+	35:00
