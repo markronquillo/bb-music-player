@@ -1,6 +1,7 @@
 ( function($) {
 
-	window.Album = Backbone.Model.extend({
+	$( function() {
+		window.Album = Backbone.Model.extend({
 
 		isFirstTrack: function(index) {
 			return index == 0;
@@ -120,6 +121,7 @@
 	window.player = new Player();
 
 	window.AlbumView = Backbone.View.extend({
+		template: _.template( $('#album-template').html() ),
 		tagName: 'li',
 		className: 'album',
 
@@ -145,11 +147,24 @@
 		},
 
 		select: function() {
-			this.collection.trigger("select", this.model);
+			this.collection.trigger("select", this.model); 
 		}
 	});
 
-	window.PlaylistAlbumView = AlbumView.extend({});
+	window.PlaylistAlbumView = AlbumView.extend({
+		events: {
+			'click .queue.remove': 'removeFromPlaylist',
+		},
+
+		initialize: function() {
+			_.bindAll(this, 'render', 'remove');
+
+		},
+
+		removeFromPlaylist: function() {
+			this.options.playlist.remove(this.model);
+		}
+	});
 
 	window.PlaylistView = Backbone.View.extend({
 		tagName: 'section',
@@ -159,13 +174,16 @@
 		initialize: function(options) {
 			this.options = options || {};
 
-			_.bindAll(this, 'render'); // set context to render function
+			_.bindAll(this, 'render', 'renderAlbum', 'queueAlbum'); // set context to render function
 			this.template = _.template( $('#playlist-template').html());
 
 			this.collection.bind('reset', this.render); // call render when collection value is reset
+			this.collection.bind('add', this.renderAlbum);
 
 			this.player = this.options.player; // arguments passed on a view is accesible in the this.options
 			this.library = this.options.library;
+
+			this.library.bind('select', this.queueAlbum);
 		},
 
 		render: function() {
@@ -174,6 +192,21 @@
 			this.$('button.play').toggle( this.player.isStopped() ); // toggle true will show false will hide
 			this.$('button.pause').toggle( this.player.isPlaying() ); // toggle true will show false will hide
 			return this;
+		},
+
+		renderAlbum: function(album) {
+			// create a new playlist album view render and append to playlistview
+			var view = new PlaylistAlbumView({
+				model: album,
+				player: this.player,
+				playlist: this.collection
+			});
+
+			this.$('ul').append( view.render().el );
+		},
+
+		queueAlbum: function(album) {
+			this.collection.add(album);
 		}
 	});
 
@@ -194,6 +227,10 @@
 
 			$(this.el).html(this.template({}));
 			$albums = this.$('.albums'); // search within the current element for this view
+
+			// rendering the libraryview
+			// passes the whole collection aside from the model
+			// will be used for trigger events
 			collection.each( function(album) {
 				var view = new LibraryAlbumView({
 					model: album,
@@ -241,4 +278,7 @@
 		}
 	});
 
+
+	});
+	
 })(jQuery);

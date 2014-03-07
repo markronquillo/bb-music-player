@@ -147,5 +147,20 @@ II. Interactivity
 	- click -> select -> view -> add -> view
 
 	change to the UI should happen in reaction in a data change event not directly from the user interaction event.
+	User interaction events should trigger data change events, views should modify itself in react to data change event
 
-	35:00
+	- When the user clicked the '+' sign (LibraryAlbumView) it triggers "this.collection.trigger('select', this.model')" 
+	- Passes the whole collection to each LibraryAlbumView 
+	- PlayListView (left side) receives a collection (player.playlist - initially empty), player(Model) and library(Collection of albums - initially filled by all the album from db)
+	- Player Model - has a playlist (collection of albums), manipulates the current track playing and the player's state.
+
+Benefits of data events
+	1. Other data:
+		if the same data events are triggered from a different source, they will be displayed on screen in the same way
+	2. Easier Rendering
+		The method to render a single Album can be used to render data when it has been bulk loaded.
+
+
+	- click -> collection.remove(model) -> model.bind("remove", ...) -> Backbone.View.remove() -> jQuery.remove(el)
+
+	
